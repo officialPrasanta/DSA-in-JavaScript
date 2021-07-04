@@ -5,4 +5,5 @@ DSA In JavaScript is a part of my `#100DaysofCode` challenge taken by myself, wh
 
 ### Programs:
 1. Linear Search
-2. binary Search
+1. Binary Search
+1. Stack Operations
