@@ -7,3 +7,4 @@ DSA In JavaScript is a part of my `#100DaysofCode` challenge taken by myself, wh
 1. Linear Search
 1. Binary Search
 1. Stack Operations
+1. Queue Operations (Basic)
