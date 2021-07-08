@@ -1,5 +1,5 @@
 class Queue {
-    // private veriables
+    // private variables
     #rear;
     #front;
     #queue;
@@ -51,20 +51,36 @@ class Queue {
             this.#front++;
         }
     }
+    peekElement() {
+        if (this.#rear === -1) {
+            throw new Error('Empty Stack');
+        }
+        return this.#queue[this.#rear];
+    }
 }
 
-
+// create queue
 let queueObj = new Queue(5);
 
+console.log('queue created...\n');
 let queue = queueObj.getQueue();
-console.log(queue);
+console.log('queue:', queue);
 
+// enqueue
+console.log('\n\ninsert item...\n');
 queueObj.enqueue(7);
 queueObj.enqueue(8);
 queueObj.enqueue(9);
 queueObj.enqueue(10);
 
-console.log(queue);
+console.log('queue: ', queue);
 
+// dequeue
+console.log('\n\nremove item...\n');
 queueObj.dequeue();
-console.log(queue);
+console.log('queue: ', queue);
+
+// peek element
+console.log('\n\npeek element...\n');
+let peek = queueObj.peekElement();
+console.log('peek element: ', peek);
