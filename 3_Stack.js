@@ -92,7 +92,7 @@ console.log('stack\'s top: ', top);
 
 
 // remove item
-console.log('\n\npop item...\n\n');
+console.log('\n\npop item...\n');
 let poppedItem = stackObj.popItem();
 console.log('popped item: ', poppedItem);
 console.log('stack: ', stack);
@@ -100,13 +100,13 @@ console.log('stack\'s top: ', top);
 
 
 // peek element
-console.log('\n\npeek element...\n\n');
+console.log('\n\npeek element...\n');
 let peekPos = stackObj.peekElement();
 console.log('peek element: ', peekPos);
 console.log('stack\'s top: ', top);
 
 // clear stack
-console.log('\n\nclear stack...\n\n');
+console.log('\n\nclear stack...\n');
 stackObj.clearStack();
 console.log('stack: ', stack);
 console.log('stack\'s top: ', top);
