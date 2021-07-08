@@ -1,64 +1,110 @@
-/***array implementation of stack***/
+class Stack {
+    // private variable
+    #stack;
 
-// 1. create an empty stack
-function createStack() {
-    return new Array();
-}
+    constructor(slots) {
+        this.top = -1;
+        this.slots = slots;
 
-// 2. insert items to the stack
-function insertItem(stack, item) {
-    stack.push(item);
-    console.log("Item Pushed!");
-}
-
-// 3. remove (pop) items from the stack
-function popItem(stack) {
-    if (stack.length == 0) {
-        throw new Error('Empty Stack');
+        // create empty stack
+        this.#stack = new Array(this.slots);
+        if (Object.seal) {
+            this.#stack.fill(undefined);
+        }
+        Object.seal(this.#stack);
     }
 
-    let poppedItem = stack.pop();
-    return poppedItem;
-}
-
-// 4. peek of the stack
-function peekElement(stack) {
-    if (stack.length == 0) {
-        throw new Error('Empty Stack');
+    // get stack
+    getStack() {
+        return this.#stack;
     }
-    let peekPos = stack.length - 1;
-    return stack[peekPos];
+
+    // insert items to the stack
+    pushItem(...args) {
+        try {
+            for (let i = 0; i < args.length; i++) {
+                this.top++;
+                this.#stack[this.top] = args[i];
+            }
+        }
+        catch (err) {
+            console.log('Error: ', err.message);
+        }
+
+    }
+
+    // remove (pop) items from the stack
+    popItem() {
+        if (this.top === -1) {
+            throw new Error('Empty Stack');
+        }
+
+        let poppedItem = Symbol('poppedItem');  // local variable
+        poppedItem = this.#stack[this.top];
+        this.#stack[this.top] = undefined;
+        this.top--;
+        return poppedItem;
+    }
+    // peek of the stack
+    peekElement() {
+        if (this.top === -1) {
+            throw new Error('Empty Stack');
+        }
+        return this.#stack[this.top];
+    }
+
+    // clear whole stack
+    clearStack() {
+        // local variables
+        let lowIndex = Symbol('lowIndex');
+        let highIndex = Symbol('highIndex');
+
+        lowIndex = 0;
+        highIndex = this.top;
+        while (lowIndex <= highIndex) {
+            this.#stack[lowIndex] = undefined;
+            this.top--;
+            lowIndex++;
+        }
+
+        console.log("Stack is Clear!!");
+    }
 }
 
-// 5. clear whole stack
-function clearStack(stack) {
-    stack.length = 0;
-    console.log("Stack is Clear!!");
-}
+
+// create stack
+let stackObj = new Stack(5);
+
+console.log('stack created...\n');
+let stack = stackObj.getStack();
+console.log('stack: ', stack);
+console.log('stack\'s top: ', stackObj.top);
 
 
-// empty stack
-let stack = createStack();
+// insert items
+console.log('\n\ninsert item...\n');
+stackObj.pushItem(1);
+stackObj.pushItem(10, 9);   //push two item sequentially
+console.log('stack: ', stack);
+console.log('stack\'s top: ', stackObj.top);
 
-// insertion
-insertItem(stack, 19);
-insertItem(stack, 12);
-insertItem(stack, 23);
-insertItem(stack, 21);
 
-// show stack elements
-console.log('Stack: ', stack);
+// remove item
+console.log('\n\npop item...\n\n');
+let poppedItem = stackObj.popItem();
+console.log('popped item: ', poppedItem);
+console.log('stack: ', stack);
+console.log('stack\'s top: ', stackObj.top);
 
-// pop item
-lastItem = popItem(stack);
-console.log("Popped Item: ", lastItem);
 
-// peek
-peekItem = peekElement(stack);
-console.log('Top Element:', peekItem);
+// peek element
+console.log('\n\npeek element...\n\n');
+let peekPos = stackObj.peekElement();
+console.log('peek element: ', peekPos);
+console.log('stack\'s top: ', stackObj.top);
 
 // clear stack
-clearStack(stack);
-
-// show empty stack
-console.log('Stack: ', stack);
+console.log('\n\nclear stack...\n\n');
+stackObj.clearStack();
+console.log('stack: ', stack);
+console.log('stack\'s top: ', stackObj.top);
